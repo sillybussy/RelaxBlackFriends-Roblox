@@ -55,18 +55,18 @@ KillGui.Name = "KillAllUI"
 KillGui.ResetOnSpawn = false
 
 local KillFrame = Instance.new("Frame", KillGui)
-KillFrame.Size = UDim2.new(0, 120, 0, 50) -- küçük kutu
-KillFrame.Position = UDim2.new(0.5, -60, 0.5, -25)
+KillFrame.Size = UDim2.new(0, 140, 0, 60) -- küçük kutu
+KillFrame.Position = UDim2.new(0.5, -70, 0.5, -30)
 KillFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 KillFrame.Active = true
 KillFrame.Draggable = true
 Instance.new("UICorner", KillFrame).CornerRadius = UDim.new(0, 12)
 
--- Kill Button
+-- Kill Button (tam frame'i kaplıyor)
 local Btn = Instance.new("TextButton", KillFrame)
-Btn.Size = UDim2.new(1, -10, 1, -10)
-Btn.Position = UDim2.new(0, 5, 0, 5)
-Btn.BackgroundColor3 = Color3.fromRGB(50,100,200) -- kapalı mavi
+Btn.Size = UDim2.new(1, 0, 1, -15) -- Credit için 15px boşluk bıraktık
+Btn.Position = UDim2.new(0, 0, 0, 0)
+Btn.BackgroundColor3 = Color3.fromRGB(255,0,0) -- kapalı kırmızı
 Btn.TextColor3 = Color3.fromRGB(255,255,255)
 Btn.Font = Enum.Font.GothamBold
 Btn.TextScaled = true
@@ -75,8 +75,8 @@ Instance.new("UICorner", Btn).CornerRadius = UDim.new(0,8)
 
 -- Credit Text
 local Credit = Instance.new("TextLabel", KillFrame)
-Credit.Size = UDim2.new(1,-10,0,15)
-Credit.Position = UDim2.new(0,5,1,0)
+Credit.Size = UDim2.new(1,0,0,15)
+Credit.Position = UDim2.new(0,0,1,0)
 Credit.BackgroundTransparency = 1
 Credit.Text = "Kılıç elinde değilse çalışmaz."
 Credit.TextColor3 = Color3.fromRGB(255,0,0)
@@ -91,7 +91,7 @@ Btn.MouseButton1Click:Connect(function()
     if Enabled then
         Btn.BackgroundColor3 = Color3.fromRGB(0,200,0) -- açık yeşil
     else
-        Btn.BackgroundColor3 = Color3.fromRGB(50,100,200) -- kapalı mavi
+        Btn.BackgroundColor3 = Color3.fromRGB(255,0,0) -- kapalı kırmızı
     end
 end)
 
