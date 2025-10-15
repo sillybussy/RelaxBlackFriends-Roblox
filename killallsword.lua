@@ -9,10 +9,10 @@ LoadingGui.Name = "RelaxLoading"
 LoadingGui.ResetOnSpawn = false
 
 local LoadingFrame = Instance.new("Frame", LoadingGui)
-LoadingFrame.BackgroundColor3 = Color3.fromRGB(30,30,30)
-LoadingFrame.Size = UDim2.new(0, 350, 0, 140) -- biraz daha küçük
+LoadingFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+LoadingFrame.Size = UDim2.new(0, 350, 0, 140)
 LoadingFrame.Position = UDim2.new(0.5, -175, 0.5, -70)
-Instance.new("UICorner", LoadingFrame).CornerRadius = UDim.new(0, 10)
+Instance.new("UICorner", LoadingFrame).CornerRadius = UDim.new(0, 12)
 
 local LoadingText = Instance.new("TextLabel", LoadingFrame)
 LoadingText.Text = "Developer: RelaxBlackFriends\nOyun içine aktarılıyor biraz bekleyin..."
@@ -35,7 +35,7 @@ LoadingSubText.BackgroundTransparency = 1
 local BarBack = Instance.new("Frame", LoadingFrame)
 BarBack.Size = UDim2.new(1, -41, 0, 20)
 BarBack.Position = UDim2.new(0, 20, 0.75, 0)
-BarBack.BackgroundColor3 = Color3.fromRGB(50,50,50)
+BarBack.BackgroundColor3 = Color3.fromRGB(60,60,60)
 Instance.new("UICorner", BarBack).CornerRadius = UDim.new(0,8)
 
 local BarFill = Instance.new("Frame", BarBack)
@@ -65,39 +65,65 @@ KillGui.Name = "KillAllUI"
 KillGui.ResetOnSpawn = false
 
 local KillFrame = Instance.new("Frame", KillGui)
-KillFrame.Size = UDim2.new(0,200,0,80) -- biraz daha küçük
+KillFrame.Size = UDim2.new(0, 200, 0, 80)
 KillFrame.Position = UDim2.new(0.5, -100, 0.5, -40)
-KillFrame.BackgroundColor3 = Color3.fromRGB(30,30,30)
+KillFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 KillFrame.Active = true
 KillFrame.Draggable = true
-Instance.new("UICorner", KillFrame).CornerRadius = UDim.new(0,10)
+Instance.new("UICorner", KillFrame).CornerRadius = UDim.new(0, 12)
+KillFrame.ClipsDescendants = true
 
+-- Minimize button
+local MinimizeBtn = Instance.new("TextButton", KillFrame)
+MinimizeBtn.Size = UDim2.new(0, 30, 0, 30)
+MinimizeBtn.Position = UDim2.new(1, -35, 0, 5)
+MinimizeBtn.BackgroundColor3 = Color3.fromRGB(200,0,0)
+MinimizeBtn.Text = "-"
+MinimizeBtn.Font = Enum.Font.GothamBold
+MinimizeBtn.TextColor3 = Color3.fromRGB(255,255,255)
+MinimizeBtn.TextScaled = true
+Instance.new("UICorner", MinimizeBtn).CornerRadius = UDim.new(0,8)
+
+local minimized = false
+local originalSize = KillFrame.Size
+
+MinimizeBtn.MouseButton1Click:Connect(function()
+    if not minimized then
+        KillFrame.Size = UDim2.new(0, 50, 0, 30)
+        minimized = true
+    else
+        KillFrame.Size = originalSize
+        minimized = false
+    end
+end)
+
+-- Kill All Button
 local Btn = Instance.new("TextButton", KillFrame)
 Btn.Size = UDim2.new(1,-20,0,50)
 Btn.Position = UDim2.new(0,10,0,10)
-Btn.BackgroundColor3 = Color3.fromRGB(50,50,50)
-Btn.TextColor3 = Color3.fromRGB(255,0,0)
+Btn.BackgroundColor3 = Color3.fromRGB(50,150,50)
+Btn.TextColor3 = Color3.fromRGB(255,255,255)
 Btn.Font = Enum.Font.GothamBold
 Btn.TextScaled = true
-Btn.Text = "Kill All: OFF"
+Btn.Text = "Herkesi Öldür: Kapalı"
 Instance.new("UICorner", Btn).CornerRadius = UDim.new(0,8)
 
+-- Credit Text
 local Credit = Instance.new("TextLabel", KillFrame)
 Credit.Size = UDim2.new(1,-20,0,20)
 Credit.Position = UDim2.new(0,10,0,65)
-Credit.BackgroundColor3 = Color3.fromRGB(40,40,40)
-Credit.Text = "Kılıcı elinize alın ve eğlence başlasın...!"
-Credit.TextColor3 = Color3.fromRGB(255,255,255)
+Credit.BackgroundTransparency = 1
+Credit.Text = "Kılıç elinde değilse çalışmaz."
+Credit.TextColor3 = Color3.fromRGB(255,0,0)
 Credit.TextScaled = true
 Credit.Font = Enum.Font.Gotham
-Instance.new("UICorner", Credit).CornerRadius = UDim.new(0,6)
+Credit.TextWrapped = true
 
 -- Kill All logic
 local Enabled = false
 Btn.MouseButton1Click:Connect(function()
     Enabled = not Enabled
-    Btn.Text = Enabled and "Kill All: ON (Hold Sword)" or "Kill All: OFF"
-    Btn.TextColor3 = Enabled and Color3.fromRGB(0,255,0) or Color3.fromRGB(255,0,0)
+    Btn.Text = Enabled and "Herkesi Öldür: Açık" or "Herkesi Öldür: Kapalı"
 end)
 
 game:GetService("RunService").RenderStepped:Connect(function()
