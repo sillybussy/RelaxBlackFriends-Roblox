@@ -1,12 +1,16 @@
---// RelaxBlackFriends
+--// RelaxBlackFriends Fly v4 (25x Speed + Loading Screen)
+--// Made for @botreal1 on TikTok
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local lp = Players.LocalPlayer
 
+-- Ana GUI
 local gui = Instance.new("ScreenGui", lp:WaitForChild("PlayerGui"))
 gui.Name = "RelaxFly"
 gui.ResetOnSpawn = false
 
+-- Loading ekranı
 local loadingFrame = Instance.new("Frame", gui)
 loadingFrame.Size = UDim2.new(0, 220, 0, 100)
 loadingFrame.Position = UDim2.new(0.5, -110, 0.5, -50)
@@ -23,12 +27,13 @@ loadingLabel.Font = Enum.Font.GothamBold
 loadingLabel.TextScaled = true
 
 for i = 1, 3 do
-	loadingLabel.Text = "Dev: RelaxBlackFriends" .. string.rep(".", i)
+	loadingLabel.Text = "Kanka yükleniyor" .. string.rep(".", i)
 	task.wait(0.5)
 end
 task.wait(0.5)
 loadingFrame:Destroy()
 
+-- GUI Frame
 local frame = Instance.new("Frame", gui)
 frame.Size = UDim2.new(0, 140, 0, 50)
 frame.Position = UDim2.new(0.5, -70, 0.5, -25)
@@ -47,12 +52,15 @@ btn.Font = Enum.Font.GothamBold
 btn.TextScaled = true
 Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 8)
 
+-- Fly Sistemi
 local flying = false
 local BV, BG
 
+local speed = 25 -- 🚀 25x hız (istersen 50 yapabilirim)
+
 local function startFly()
 	flying = true
-	btn.Text = "Uç: Açık (10x)"
+	btn.Text = "Uç: Açık (" .. speed .. "x)"
 	btn.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 
 	local char = lp.Character or lp.CharacterAdded:Wait()
@@ -78,7 +86,7 @@ local function startFly()
 			local cam = workspace.CurrentCamera
 			local move = Vector3.zero
 			if hum.MoveDirection.Magnitude > 0 then
-				move = cam.CFrame.LookVector * 10 -- 10x hız
+				move = cam.CFrame.LookVector * speed
 			end
 			BV.Velocity = move
 			BG.CFrame = cam.CFrame
